@@ -14,10 +14,7 @@ export const SymptomsReviewSection = ({
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    const currentIndex = screenFlow.indexOf(screenState);
-    const newIndex = currentIndex - 1;
-    const newScreenState = screenFlow[newIndex];
-    setScreenState(newScreenState);
+    navigate("/");
   };
 
   const getFormattedData = (array) => {
