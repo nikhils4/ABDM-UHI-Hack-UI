@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import { Home } from "./components/Home";
-import { EMR } from "./components/EMR";
+import { Home } from "./components/Home/index.js";
+import { EMR } from "./components/EMR/index.js";
 
 function App() {
   return (

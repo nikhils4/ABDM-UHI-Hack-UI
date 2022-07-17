@@ -1,0 +1,7 @@
+button[class^='DatePicker_button'] {
+  display: none;
+}
+
+span[class^='DatePicker_monthYearLabel'] {
+  display: none;
+}
