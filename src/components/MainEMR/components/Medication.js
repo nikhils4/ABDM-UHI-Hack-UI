@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 
 export const Medication = () => {
   const [localState, setLocalState] = useState("");
-  const [medication, setMedication] = useState([]);
+  const [medication, setMedication] = useState(
+    JSON.parse(window.localStorage.getItem("medication")) || []
+  );
 
   useEffect(() => {
-    window.localStorage.setItem("chiefComplaints", JSON.stringify(medication));
+    window.localStorage.setItem("medication", JSON.stringify(medication));
   }, [medication]);
 
   const handleSymptomsAdd = () => {

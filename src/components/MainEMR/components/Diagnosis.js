@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 
 export const Diagnosis = () => {
   const [localState, setLocalState] = useState("");
-  const [diagnosis, setDiagnosis] = useState([]);
+  const [diagnosis, setDiagnosis] = useState(
+    JSON.parse(window.localStorage.getItem("diagnosis")) || []
+  );
 
   useEffect(() => {
     window.localStorage.setItem("diagnosis", JSON.stringify(diagnosis));
@@ -50,7 +52,14 @@ export const Diagnosis = () => {
       />
       {diagnosis.length > 0 && (
         <>
-          <div>Added</div>
+          <div
+            style={{
+              marginTop: "20px",
+              fontWeight: "bold",
+            }}
+          >
+            Added
+          </div>
           <ul>
             {diagnosis?.map((diagnosis) => (
               <li>{diagnosis}</li>

@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 
 export const ChiefComplaints = () => {
   const [localState, setLocalState] = useState("");
-  const [chiefComplaints, setChiefComplaints] = useState([]);
+  const [chiefComplaints, setChiefComplaints] = useState(
+    JSON.parse(window.localStorage.getItem("chiefComplaints")) || []
+  );
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -53,7 +55,14 @@ export const ChiefComplaints = () => {
       />
       {chiefComplaints.length > 0 && (
         <>
-          <div>Added</div>
+          <div
+            style={{
+              marginTop: "20px",
+              fontWeight: "bold",
+            }}
+          >
+            Added
+          </div>
           <ul>
             {chiefComplaints?.map((chiefComplaint) => (
               <li>{chiefComplaint}</li>

@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 
 export const Advice = () => {
   const [localState, setLocalState] = useState("");
-  const [advice, setAdvice] = useState([]);
+  const [advice, setAdvice] = useState(
+    JSON.parse(window.localStorage.getItem("advice")) || []
+  );
 
   useEffect(() => {
     window.localStorage.setItem("advice", JSON.stringify(advice));
@@ -50,7 +52,14 @@ export const Advice = () => {
       />
       {advice.length > 0 && (
         <>
-          <div>Added</div>
+          <div
+            style={{
+              marginTop: "20px",
+              fontWeight: "bold",
+            }}
+          >
+            Added
+          </div>
           <ul>
             {advice?.map((advice) => (
               <li>{advice}</li>
