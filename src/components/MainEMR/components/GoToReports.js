@@ -1,6 +1,11 @@
+import { useNavigate} from "react-router-dom";
+
 export const GoToReports = () => {
+  const navigate=useNavigate()
   return (
     <div
+    onClick={()=>navigate('/patient-reports')
+    }
       style={{
         margin: "15px 0px",
         borderRadius: "5px",
