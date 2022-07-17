@@ -21,6 +21,11 @@ export const SymptomsReviewSection = ({
   };
 
   const handleStartConsultation = () => {
+    window.localStorage.removeItem("chiefComplaints");
+    window.localStorage.removeItem("medication");
+    window.localStorage.removeItem("diagnosis");
+    window.localStorage.removeItem("advice");
+
     window.localStorage.setItem(
       "consultationData",
       JSON.stringify({

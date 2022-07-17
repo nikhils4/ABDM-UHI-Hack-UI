@@ -19,11 +19,16 @@ export const SymptomsSection = ({
   });
 
   useEffect(() => {
-    fetch("")
+    fetch("https://uhi-hack.herokuapp.com/symptoms/doctor/checkup", {
+      method: "POST",
+      body: JSON.stringify({
+        EmrId: "39c34851-030f-482c-a0a6-952075707783",
+      }),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setSymptomsData(data);
+        setSymptomsData(data?.H);
       })
       .catch((err) => {
         console.log(err);
@@ -130,7 +135,7 @@ export const SymptomsSection = ({
         </div>
         <h3>Prominence of Symptoms</h3>
         <div>
-          {symptomsData["Prominence of Symptoms"]?.map((symptom) => {
+          {symptomsData?.["Prominence_of_Symptoms"]?.map((symptom) => {
             if (
               !doesItContain(symptom, selectedProminenceOfSymptoms, "symptom")
             ) {
@@ -186,7 +191,7 @@ export const SymptomsSection = ({
         </div>
         <h3>Pain Located</h3>
         <div>
-          {symptomsData["Pain Located"]?.map((symptom) => {
+          {symptomsData?.["Pain_Located"]?.map((symptom) => {
             if (!doesItContain(symptom, painLocation, "symptom")) {
               return (
                 <Chip
@@ -238,9 +243,9 @@ export const SymptomsSection = ({
             + Add Symptom
           </span>
         </div>
-        <h3>Accompanied Symptoms</h3>
+        <h3>Acompained_Symptoms</h3>
         <div>
-          {symptomsData["Accompanied Symptoms"]?.map((symptom) => {
+          {symptomsData?.["Accompanied Symptoms"]?.map((symptom) => {
             if (!doesItContain(symptom, accompaniedSymptoms, "symptom")) {
               return (
                 <Chip

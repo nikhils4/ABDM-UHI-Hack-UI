@@ -34,7 +34,6 @@ export const ChiefComplaints = () => {
         flexDirection: "column",
         padding: "10px 25px",
         flexGrow: 1,
-        width: "100%",
       }}
     >
       <GoToReports />

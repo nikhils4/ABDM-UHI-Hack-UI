@@ -12,14 +12,16 @@ export const SymptomsDetailsSection = ({
   setSymptomsInduced,
   symptomsRelievedBy = [],
   setSymptomsRelievedBy,
-  symptomsDetailData = [],
-  setSymptomsDetailData,
   screenFlow,
   setScreenState,
   screenState,
 }) => {
+  const [symptomsDetailData, setSymptomsDetailData] = useState([]);
+
   useEffect(() => {
-    fetch("")
+    fetch("https://uhi-hack.herokuapp.com/symptoms/doctor/suggestions", {
+      method: "POST",
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -29,6 +31,10 @@ export const SymptomsDetailsSection = ({
         console.log(err);
       });
   }, []);
+
+  console.log({
+    setSymptomsDetailData,
+  });
 
   const handleClick = (dataObject, section) => {
     if (section === "SI") {
@@ -193,7 +199,7 @@ export const SymptomsDetailsSection = ({
         </div>
         <h3>Symptoms Induced/ Worsened by</h3>
         <div>
-          {symptomsDetailData["Symptoms Induced/ Worsened by"]?.map(
+          {symptomsDetailData?.["Symptoms Induced"]?.Symptoms_Induced?.map(
             (symptom) => {
               if (!doesItContain(symptom, symptomsInduced, "symptom")) {
                 return (
@@ -249,47 +255,49 @@ export const SymptomsDetailsSection = ({
         </div>
         <h3>Symptoms relieved by</h3>
         <div>
-          {symptomsDetailData["Symptoms relieved by"]?.map((symptom) => {
-            if (!doesItContain(symptom, symptomsRelievedBy, "symptom")) {
-              return (
-                <Chip
-                  label={symptom}
-                  onClick={(event) =>
-                    handleClick(
-                      { symptom: event.target.innerText, custom: false },
-                      "SRB"
-                    )
-                  }
-                  style={{
-                    backgroundColor: "white",
-                    border: "1px solid black",
-                    margin: "5px",
-                    color: "#02626F",
-                    fontWeight: "bold",
-                    fontSize: "1rem",
-                  }}
-                />
-              );
-            } else {
-              return (
-                <Chip
-                  label={symptom}
-                  variant="outlined"
-                  onClick={(event) =>
-                    handleDelete(event.target.innerText, "SRB")
-                  }
-                  onDelete={() => handleDelete(symptom, "SRB")}
-                  style={{
-                    backgroundColor: "#27C1CD",
-                    margin: "5px",
-                    color: "white",
-                    border: "none",
-                    fontSize: "1rem",
-                  }}
-                />
-              );
+          {symptomsDetailData?.["Symptoms Relieved"]?.Symptoms_Relieved?.map(
+            (symptom) => {
+              if (!doesItContain(symptom, symptomsRelievedBy, "symptom")) {
+                return (
+                  <Chip
+                    label={symptom}
+                    onClick={(event) =>
+                      handleClick(
+                        { symptom: event.target.innerText, custom: false },
+                        "SRB"
+                      )
+                    }
+                    style={{
+                      backgroundColor: "white",
+                      border: "1px solid black",
+                      margin: "5px",
+                      color: "#02626F",
+                      fontWeight: "bold",
+                      fontSize: "1rem",
+                    }}
+                  />
+                );
+              } else {
+                return (
+                  <Chip
+                    label={symptom}
+                    variant="outlined"
+                    onClick={(event) =>
+                      handleDelete(event.target.innerText, "SRB")
+                    }
+                    onDelete={() => handleDelete(symptom, "SRB")}
+                    style={{
+                      backgroundColor: "#27C1CD",
+                      margin: "5px",
+                      color: "white",
+                      border: "none",
+                      fontSize: "1rem",
+                    }}
+                  />
+                );
+              }
             }
-          })}
+          )}
           {/* // Add custom chip rendering here */}
           <span
             style={{
