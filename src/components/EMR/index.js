@@ -109,6 +109,9 @@ export const EMR = () => {
             accompaniedSymptoms={accompaniedSymptoms}
             symptomsInduced={symptomsInduced}
             symptomsRelievedBy={symptomsRelievedBy}
+            screenFlow={screenFlow}
+            setScreenState={setScreenState}
+            screenState={screenState}
           />
         )}
       </Grid>

@@ -4,7 +4,17 @@ export const SymptomsReviewSection = ({
   accompaniedSymptoms = [],
   symptomsInduced = [],
   symptomsRelievedBy = [],
+  screenFlow = [],
+  screenState = [],
+  setScreenState,
 }) => {
+  const handleGoBack = () => {
+    const currentIndex = screenFlow.indexOf(screenState);
+    const newIndex = currentIndex - 1;
+    const newScreenState = screenFlow[newIndex];
+    setScreenState(newScreenState);
+  };
+
   return (
     <>
       <div
@@ -140,6 +150,7 @@ export const SymptomsReviewSection = ({
               paddingBottom: "25px",
               fontWeight: "bold",
             }}
+            onClick={handleGoBack}
           >
             Back to Appointment
           </div>

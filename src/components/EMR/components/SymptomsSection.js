@@ -107,14 +107,14 @@ export const SymptomsSection = ({
             style={{
               flexGrow: 1,
               border: "2px solid #27C1CD",
-              marginLeft: "10px",
+              marginLeft: "20px",
             }}
           ></div>
           <div
             style={{
               flexGrow: 1,
               border: "2px solid #4ed8e9",
-              marginRight: "10px",
+              marginRight: "20px",
             }}
           ></div>
           <div
