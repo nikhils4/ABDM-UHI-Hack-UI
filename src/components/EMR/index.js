@@ -104,6 +104,7 @@ export const EMR = () => {
         )}
         {screenState === "SymptomsReviewSection" && (
           <SymptomsReviewSection
+            majorSymptoms={majorSymptoms}
             selectedProminenceOfSymptoms={selectedProminenceOfSymptoms}
             painLocation={painLocation}
             accompaniedSymptoms={accompaniedSymptoms}

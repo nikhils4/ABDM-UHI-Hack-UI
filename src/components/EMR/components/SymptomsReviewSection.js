@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 export const SymptomsReviewSection = ({
   selectedProminenceOfSymptoms = [],
   painLocation = [],
@@ -7,12 +9,30 @@ export const SymptomsReviewSection = ({
   screenFlow = [],
   screenState = [],
   setScreenState,
+  majorSymptoms = [],
 }) => {
+  const navigate = useNavigate();
+
   const handleGoBack = () => {
     const currentIndex = screenFlow.indexOf(screenState);
     const newIndex = currentIndex - 1;
     const newScreenState = screenFlow[newIndex];
     setScreenState(newScreenState);
+  };
+
+  const handleStartConsultation = () => {
+    window.localStorage.setItem(
+      "consultationData",
+      JSON.stringify({
+        selectedProminenceOfSymptoms,
+        painLocation,
+        accompaniedSymptoms,
+        symptomsInduced,
+        symptomsRelievedBy,
+        majorSymptoms,
+      })
+    );
+    navigate("/mainEmr");
   };
 
   return (
@@ -149,12 +169,14 @@ export const SymptomsReviewSection = ({
               paddingTop: "25px",
               paddingBottom: "25px",
               fontWeight: "bold",
+              cursor: "pointer",
             }}
             onClick={handleGoBack}
           >
             Back to Appointment
           </div>
           <div
+            onClick={handleStartConsultation}
             style={{
               flexGrow: 1,
               textAlign: "center",
@@ -163,6 +185,7 @@ export const SymptomsReviewSection = ({
               paddingBottom: "25px",
               color: "white",
               fontWeight: "bold",
+              cursor: "pointer",
             }}
           >
             Start Consultation {">"}

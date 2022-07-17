@@ -28,16 +28,9 @@ export const ChiefComplaints = () => {
         flexDirection: "column",
         padding: "10px 20px",
         flexGrow: 1,
+        width: "100%",
       }}
     >
-      <div
-        style={{
-          height: "80px",
-          border: "1px solid blue",
-        }}
-      >
-        Go to reports
-      </div>
       <h3>Chief Complaints</h3>
       <TextField
         width="100%"

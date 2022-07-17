@@ -27,14 +27,6 @@ export const Medication = () => {
         flexGrow: 1,
       }}
     >
-      <div
-        style={{
-          height: "80px",
-          border: "1px solid blue",
-        }}
-      >
-        Go to reports
-      </div>
       <h3>Medication</h3>
       <TextField
         width="100%"

@@ -138,7 +138,7 @@ export const SymptomsDetailsSection = ({
             }}
             onClick={handleGoForward}
           >
-            Next {">"}
+            Preview {">"}
           </div>
         </div>
         <h3>Previous Selected Symptoms</h3>

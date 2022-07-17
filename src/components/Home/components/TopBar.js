@@ -39,10 +39,10 @@ export const TopBar = ({ selectedDate }) => {
             setOpen((isOpen) => !isOpen);
           }}
         />
-
+        {/* 
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <DatePicker open={open} value={new Date(selectedDate)} />
-        </MuiPickersUtilsProvider>
+        </MuiPickersUtilsProvider> */}
       </div>
     </>
   );

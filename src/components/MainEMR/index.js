@@ -5,6 +5,7 @@ import { ChiefComplaints } from "./components/ChiefComplaints";
 import { Diagnosis } from "./components/Diagnosis";
 import { Medication } from "./components/Medication";
 import { Advice } from "./components/Advice";
+import { GoToReports } from "./components/GoToReports";
 
 export const MainEMR = () => {
   const [mainEmrScreenState, setMainEmrScreenState] =
@@ -22,10 +23,18 @@ export const MainEMR = () => {
         }}
       >
         <Sidebar setMainEmrScreenState={setMainEmrScreenState} />
-        {mainEmrScreenState === "ChiefComplaints" && <ChiefComplaints />}
-        {mainEmrScreenState === "Diagnosis" && <Diagnosis />}
-        {mainEmrScreenState === "Medication" && <Medication />}
-        {mainEmrScreenState === "Advice" && <Advice />}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <GoToReports />
+          {mainEmrScreenState === "ChiefComplaints" && <ChiefComplaints />}
+          {mainEmrScreenState === "Diagnosis" && <Diagnosis />}
+          {mainEmrScreenState === "Medication" && <Medication />}
+          {mainEmrScreenState === "Advice" && <Advice />}
+        </div>
       </Grid>
       <Grid item md={2}></Grid>
     </Grid>

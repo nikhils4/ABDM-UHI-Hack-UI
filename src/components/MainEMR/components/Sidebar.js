@@ -3,10 +3,11 @@ export const Sidebar = ({ setMainEmrScreenState }) => {
     <div
       style={{
         width: "50px",
-        border: "2px solid blue",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        height: "100vh",
+        backgroundColor: "#F5FEFF",
       }}
     >
       <div
@@ -19,10 +20,10 @@ export const Sidebar = ({ setMainEmrScreenState }) => {
           style={{
             height: "35px",
             width: "35px",
-            border: "2px solid green",
             borderRadius: "50%",
             marginTop: "60px",
             position: "relative",
+            backgroundColor: "#4ed8e9",
           }}
         >
           <div
