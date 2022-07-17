@@ -27,6 +27,10 @@ export const ChiefComplaints = () => {
     setChiefComplaints(chiefComplaints.filter((item) => item !== value));
   };
 
+  const majorSymptoms = JSON.parse(
+    localStorage.getItem("consultationData")
+  ).majorSymptoms;
+
   return (
     <div
       style={{
@@ -53,7 +57,7 @@ export const ChiefComplaints = () => {
           ),
         }}
       />
-      {chiefComplaints.length > 0 && (
+      {majorSymptoms.length > 0 && (
         <>
           <div
             style={{
@@ -64,13 +68,13 @@ export const ChiefComplaints = () => {
             Previously Added
           </div>
           <ul>
-            {chiefComplaints?.map((chiefComplaint) => (
+            {majorSymptoms?.map(({ symptom }) => (
               <li
                 style={{
                   color: "#A9ACAC",
                 }}
               >
-                {chiefComplaint}
+                {symptom}
               </li>
             ))}
           </ul>

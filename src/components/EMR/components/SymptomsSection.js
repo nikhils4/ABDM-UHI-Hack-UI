@@ -13,26 +13,46 @@ export const SymptomsSection = ({
   screenState,
 }) => {
   const [symptomsData, setSymptomsData] = useState({
-    "Prominence of Symptoms": ["fever", "cold"],
-    "Pain Located": ["fever", "cold"],
-    "Accompanied Symptoms": ["fever", "cold"],
+    Prominence_of_Symptoms: ["1 week", "2 days", "5-7 days"],
+    Pain_Located: ["Shoulder", "Around nose", "Ear"],
+    Acompained_Symptoms: ["Sleeplessness", "Pain in chest"],
   });
 
   useEffect(() => {
+    let url_string = window.location.href;
+    let url = new URL(url_string);
+    const emrId = url.searchParams.get("emrId");
     fetch("https://uhi-hack.herokuapp.com/symptoms/doctor/checkup", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
-        EmrId: "39c34851-030f-482c-a0a6-952075707783",
+        EmrId: emrId,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setSymptomsData(data?.H);
+        if (data?.H || data?.Cough || data?.Fever)
+          setSymptomsData(data?.H || data?.Cough || data?.Fever);
       })
       .catch((err) => {
         console.log(err);
       });
+    // fetch("https://uhi-hack.herokuapp.com/symptoms/doctor/checkup", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     EmrId: emrId,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     setSymptomsData(data?.H);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, []);
 
   const handleClick = (dataObject, section) => {
@@ -134,7 +154,11 @@ export const SymptomsSection = ({
           </div>
         </div>
         <h3>Prominence of Symptoms</h3>
-        <div>
+        <div
+          style={{
+            marginBottom: "20px",
+          }}
+        >
           {symptomsData?.["Prominence_of_Symptoms"]?.map((symptom) => {
             if (
               !doesItContain(symptom, selectedProminenceOfSymptoms, "symptom")
@@ -190,7 +214,11 @@ export const SymptomsSection = ({
           </span>
         </div>
         <h3>Pain Located</h3>
-        <div>
+        <div
+          style={{
+            marginBottom: "20px",
+          }}
+        >
           {symptomsData?.["Pain_Located"]?.map((symptom) => {
             if (!doesItContain(symptom, painLocation, "symptom")) {
               return (
@@ -243,9 +271,13 @@ export const SymptomsSection = ({
             + Add Symptom
           </span>
         </div>
-        <h3>Acompained_Symptoms</h3>
-        <div>
-          {symptomsData?.["Accompanied Symptoms"]?.map((symptom) => {
+        <h3>Accompanied Symptoms</h3>
+        <div
+          style={{
+            marginBottom: "20px",
+          }}
+        >
+          {symptomsData["Acompained_Symptoms"]?.map((symptom) => {
             if (!doesItContain(symptom, accompaniedSymptoms, "symptom")) {
               return (
                 <Chip

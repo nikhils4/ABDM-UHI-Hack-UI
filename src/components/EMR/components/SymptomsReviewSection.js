@@ -20,12 +20,15 @@ export const SymptomsReviewSection = ({
     setScreenState(newScreenState);
   };
 
+  const getFormattedData = (array) => {
+    return array.map(({ symptom }) => symptom);
+  };
+
   const handleStartConsultation = () => {
     window.localStorage.removeItem("chiefComplaints");
     window.localStorage.removeItem("medication");
     window.localStorage.removeItem("diagnosis");
     window.localStorage.removeItem("advice");
-
     window.localStorage.setItem(
       "consultationData",
       JSON.stringify({
@@ -37,7 +40,25 @@ export const SymptomsReviewSection = ({
         majorSymptoms,
       })
     );
-    navigate("/mainEmr");
+    let url_string = window.location.href;
+    let url = new URL(url_string);
+    const emrId = url.searchParams.get("emrId");
+    fetch("https://uhi-hack.herokuapp.com/emr/updateEmrReceptionist", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        provisionalDiagnosis: [
+          ...getFormattedData(selectedProminenceOfSymptoms),
+          ...getFormattedData(painLocation),
+          ...getFormattedData(accompaniedSymptoms),
+          ...getFormattedData(symptomsInduced),
+          ...getFormattedData(symptomsRelievedBy),
+        ],
+      }),
+    });
+    navigate(`/mainEmr?emrId=${emrId}`);
   };
 
   return (
@@ -157,11 +178,16 @@ export const SymptomsReviewSection = ({
         )}
         <div
           style={{
+            height: "100px",
+          }}
+        ></div>
+        <div
+          style={{
             display: "flex",
             flexDirection: "row",
-            width: "100vw",
+            width: "100%",
             alignItems: "center",
-            position: "fixed",
+            position: "absolute",
             bottom: 0,
             transform: "translateX(-15px)",
           }}

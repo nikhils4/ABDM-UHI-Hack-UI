@@ -17,15 +17,29 @@ export const EMR = () => {
   const [symptomsInduced, setSymptomsInduced] = useState([]);
   const [symptomsRelievedBy, setSymptomsRelievedBy] = useState([]);
   const [screenFlow, setScreenFlow] = useState([]);
+  let url_string = window.location.href;
+  let url = new URL(url_string);
+  const apptId = url.searchParams.get("apptId");
+  const name = url.searchParams.get("name");
+  const apptSource = url.searchParams.get("source");
+  const apptTime = url.searchParams.get("time");
+
+  const formatData = (array) => {
+    return array.map((name) => {
+      return {
+        symptom: name,
+        custom: false,
+      };
+    });
+  };
 
   useEffect(() => {
-    fetch(
-      "https://uhi-hack.herokuapp.com/appointment/75282f14-004c-486d-a006-d484fb785f18"
-    )
+    fetch(`https://uhi-hack.herokuapp.com/appointment/${apptId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.emr.symptoms.length > 0) {
           setScreenState("SymptomsSection");
+          setMajorSymptoms(formatData(data.emr.symptoms));
           setScreenFlow([
             "Dashboard",
             "SymptomsSection",
@@ -61,6 +75,11 @@ export const EMR = () => {
       <Grid item xs={12} md={8}>
         {screenState === "Dashboard" && <Navigate to="/" replace />}
         <Header
+          name={name}
+          apptSource={apptSource}
+          apptTime={apptTime}
+          majorSymptoms={majorSymptoms}
+          selectedProminenceOfSymptoms={selectedProminenceOfSymptoms}
           screenState={screenState}
           setScreenState={setScreenState}
           screenFlow={screenFlow}

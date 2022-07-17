@@ -1,7 +1,16 @@
 import { TopBar } from "./TopBar";
 import { SymptomsTopSection } from "./SymptomsTopSection";
 
-export const Header = ({ screenState, screenFlow, setScreenState }) => {
+export const Header = ({
+  screenState,
+  screenFlow,
+  setScreenState,
+  majorSymptoms,
+  selectedProminenceOfSymptoms,
+  name,
+  apptSource,
+  apptTime,
+}) => {
   return (
     <>
       <div
@@ -16,6 +25,9 @@ export const Header = ({ screenState, screenFlow, setScreenState }) => {
           screenFlow={screenFlow}
           setScreenState={setScreenState}
           screenState={screenState}
+          name={name}
+          apptSource={apptSource}
+          apptTime={apptTime}
         />
       </div>
       <div
@@ -25,7 +37,14 @@ export const Header = ({ screenState, screenFlow, setScreenState }) => {
           padding: "10px 15px",
         }}
       >
-        {screenState === "SymptomsReviewSection" && <SymptomsTopSection />}
+        {(screenState === "SymptomsReviewSection" ||
+          screenState === "SymptomsSection" ||
+          screenState === "SymptomsDetailsSection") && (
+          <SymptomsTopSection
+            majorSymptoms={majorSymptoms}
+            selectedProminenceOfSymptoms={selectedProminenceOfSymptoms}
+          />
+        )}
       </div>
     </>
   );

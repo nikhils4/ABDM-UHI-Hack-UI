@@ -1,16 +1,36 @@
 import { Chip } from "@mui/material";
+import { useEffect, useState } from "react";
 
 export const MajorSymptomsSection = ({
   majorSymptoms = [],
   setMajorSymptoms,
   setScreenState,
 }) => {
-  const majorSymptomsStatic = [
+  const [majorSymptomsStatic, setMajorSymptomsStatic] = useState([
     "Fever",
     "Cold & Cough",
     "Headache",
     "Chest Pain",
-  ];
+  ]);
+
+  useEffect(() => {
+    fetch("https://uhi-hack.herokuapp.com/symptoms/patient/suggestions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        Specialization: "General_Physician",
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMajorSymptomsStatic(data?.General_Physician?.Head);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleClick = (dataObject, section) => {
     setMajorSymptoms([...majorSymptoms, dataObject]);
@@ -18,6 +38,27 @@ export const MajorSymptomsSection = ({
 
   const handleDelete = (value, section) => {
     setMajorSymptoms(majorSymptoms.filter(({ symptom }) => symptom !== value));
+  };
+
+  const getFormattedData = (array) => {
+    return array.map(({ symptom }) => symptom);
+  };
+
+  const handleSaveAndProceed = () => {
+    let url_string = window.location.href;
+    let url = new URL(url_string);
+    const emrId = url.searchParams.get("emrId");
+    fetch("https://uhi-hack.herokuapp.com/emr/addEmrPatient", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emrId,
+        symptoms: getFormattedData(majorSymptoms),
+      }),
+    });
+    setScreenState("SymptomsSection");
   };
 
   console.log({
@@ -97,7 +138,7 @@ export const MajorSymptomsSection = ({
             fontSize: "14px",
             fontWeight: "bold",
             marginTop: "40px",
-            backgroundColor: "#52B6C3",
+            backgroundColor: "#4ED8E9",
             borderRadius: "50px",
             padding: "10px",
             color: "white ",
@@ -105,7 +146,7 @@ export const MajorSymptomsSection = ({
             cursor: "pointer",
             alignSelf: "center",
           }}
-          onClick={() => setScreenState("SymptomsSection")}
+          onClick={handleSaveAndProceed}
         >
           Save and proceed
         </button>

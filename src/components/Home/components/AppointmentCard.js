@@ -9,6 +9,7 @@ export const AppointmentCard = ({ appointment }) => {
     contactNumber,
     appointmentTime,
     appointmentId,
+    emrId,
   } = appointment;
   return (
     <div
@@ -40,7 +41,7 @@ export const AppointmentCard = ({ appointment }) => {
       </div>
       <div>{appointmentTime}</div>
       <Link
-        to={`/emr?apptId=${appointmentId}&name=${patientName}&time=${appointmentTime}&source=${appointmentSource}`}
+        to={`/emr?apptId=${appointmentId}&emrId=${emrId}&name=${patientName}&time=${appointmentTime}&source=${appointmentSource}`}
       >
         {" "}
         <button

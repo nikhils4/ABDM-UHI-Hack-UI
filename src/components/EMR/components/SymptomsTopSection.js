@@ -1,4 +1,9 @@
-export const SymptomsTopSection = () => {
+export const SymptomsTopSection = ({
+  selectedProminenceOfSymptoms,
+  majorSymptoms,
+}) => {
+  const symptoms = majorSymptoms.map(({ symptom }) => symptom);
+
   return (
     <>
       <div
@@ -19,19 +24,19 @@ export const SymptomsTopSection = () => {
       <div
         style={{
           display: "flex",
+          alignItems: "center",
         }}
       >
         <div
           style={{
-            border: "1px solid blue",
             width: "90px",
+            textAlign: "center",
           }}
         >
-          Head/ Stomach/ Bones and Joints or Default
+          <img src="https://uhi-git-feature-uhi-patient-symp-934750-amansaxenabfhl-gmailcom.vercel.app/_next/image?url=%2Fhead.svg&w=256&q=75" />
         </div>
         <div
           style={{
-            border: "1px solid black",
             flexGrow: "1",
             display: "flex",
             flexDirection: "column",
@@ -43,9 +48,9 @@ export const SymptomsTopSection = () => {
               paddingLeft: "7px",
             }}
           >
-            Cough, Cold, Fever list to be displayed
+            {symptoms.join(", ")}
           </div>
-          <div
+          {/* <div
             style={{
               display: "flex",
               flexWrap: "wrap",
@@ -82,7 +87,7 @@ export const SymptomsTopSection = () => {
             >
               pdf or image
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
