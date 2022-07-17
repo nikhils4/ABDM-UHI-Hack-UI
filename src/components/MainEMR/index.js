@@ -16,6 +16,8 @@ export const MainEMR = () => {
     return array.map(({ symptom }) => symptom);
   };
 
+  const getLocalStorage = () => {};
+
   const handleSaveConsultation = () => {
     let url_string = window.location.href;
     let url = new URL(url_string);
@@ -29,15 +31,29 @@ export const MainEMR = () => {
         emrId,
         symptoms: [
           ...getFormattedData(
-            JSON.parse(localStorage.getItem("consultationData")).majorSymptoms
+            JSON.parse(
+              localStorage.getItem("consultationData") || JSON.stringify([])
+            )?.majorSymptoms
           ),
-          ...JSON.parse(window.localStorage.getItem("chiefComplaints")),
+          ...JSON.parse(
+            window.localStorage.getItem("chiefComplaints") || JSON.stringify([])
+          ),
         ],
         provisionalDiagnosis: [
-          ...JSON.parse(window.localStorage.getItem("diagnosis")),
+          ...JSON.parse(
+            window.localStorage.getItem("diagnosis") || JSON.stringify([])
+          ),
         ],
-        advice: [...JSON.parse(window.localStorage.getItem("advice"))],
-        medication: [...JSON.parse(window.localStorage.getItem("medication"))],
+        advice: [
+          ...JSON.parse(
+            window.localStorage.getItem("advice") || JSON.stringify([])
+          ),
+        ],
+        medication: [
+          ...JSON.parse(
+            window.localStorage.getItem("medication") || JSON.stringify([])
+          ),
+        ],
       }),
     });
     navigate("/");

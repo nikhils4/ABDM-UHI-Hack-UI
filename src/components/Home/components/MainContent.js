@@ -34,6 +34,7 @@ export const MainContent = ({ selectedDate }) => {
           appointmentTime: "10:30 am - 11:30 am",
           appointmentId: appointment.appointmentId,
           emrId: appointment.emrId,
+          status: appointment.status,
         };
       }
     });

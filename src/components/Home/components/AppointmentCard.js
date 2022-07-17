@@ -10,6 +10,7 @@ export const AppointmentCard = ({ appointment }) => {
     appointmentTime,
     appointmentId,
     emrId,
+    status,
   } = appointment;
   return (
     <div
@@ -40,18 +41,15 @@ export const AppointmentCard = ({ appointment }) => {
         {gender} {age} | {contactNumber}
       </div>
       <div>{appointmentTime}</div>
-      <Link
-        to={`/emr?apptId=${appointmentId}&emrId=${emrId}&name=${patientName}&time=${appointmentTime}&source=${appointmentSource}`}
-      >
-        {" "}
+      {status === "com" ? (
         <button
           style={{
             width: "fit-content",
             position: "absolute",
             bottom: "10px",
-            right: "15px",
+            right: "25px",
             fontSize: "18px",
-            backgroundColor: "#52B6C3",
+            backgroundColor: "#4BB543",
             borderRadius: "50px",
             padding: "10px",
             color: "white ",
@@ -59,9 +57,32 @@ export const AppointmentCard = ({ appointment }) => {
             cursor: "pointer",
           }}
         >
-          + Symptoms
+          Completed
         </button>
-      </Link>
+      ) : (
+        <Link
+          to={`/emr?apptId=${appointmentId}&emrId=${emrId}&name=${patientName}&time=${appointmentTime}&source=${appointmentSource}`}
+        >
+          {" "}
+          <button
+            style={{
+              width: "fit-content",
+              position: "absolute",
+              bottom: "10px",
+              right: "15px",
+              fontSize: "18px",
+              backgroundColor: "#52B6C3",
+              borderRadius: "50px",
+              padding: "10px",
+              color: "white ",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            + Symptoms
+          </button>
+        </Link>
+      )}
     </div>
   );
 };

@@ -33,8 +33,8 @@ export const SymptomsSection = ({
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data?.H || data?.Cough || data?.Fever)
-          setSymptomsData(data?.H || data?.Cough || data?.Fever);
+        if (data?.H || data?.Cough || data?.Fever || data?.["0"])
+          setSymptomsData(data?.H || data?.Cough || data?.Fever || data?.["0"]);
       })
       .catch((err) => {
         console.log(err);
