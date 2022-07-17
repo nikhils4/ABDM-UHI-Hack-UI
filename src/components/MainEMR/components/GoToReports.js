@@ -9,6 +9,7 @@ export const GoToReports = () => {
         alignItems: "center",
         cursor: "pointer",
         padding: "25px 20px",
+        position: "relative",
       }}
     >
       <div>
@@ -29,7 +30,23 @@ export const GoToReports = () => {
           On Prescription and Reports
         </span>
       </div>
-      <div></div>
+      <div
+        style={{
+          position: "absolute",
+          right: "0px",
+          top: "50%",
+          transform: "translate(50%, -50%)",
+          height: "30px",
+          width: "30px",
+          backgroundColor: "#fff",
+          lineHeight: "30px",
+          textAlign: "center",
+          borderRadius: "5px",
+          boxShadow: "0px 0px 5px #efefef",
+        }}
+      >
+        {">"}
+      </div>
     </div>
   );
 };

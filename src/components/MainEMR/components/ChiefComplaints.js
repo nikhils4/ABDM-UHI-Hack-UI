@@ -2,6 +2,7 @@ import { TextField, InputAdornment } from "@mui/material";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { useState, useEffect } from "react";
 import { GoToReports } from "./GoToReports";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 export const ChiefComplaints = () => {
   const [localState, setLocalState] = useState("");
@@ -20,6 +21,10 @@ export const ChiefComplaints = () => {
     if (localState.length <= 0) return;
     setChiefComplaints([...chiefComplaints, localState]);
     setLocalState("");
+  };
+
+  const handleDelete = (value) => {
+    setChiefComplaints(chiefComplaints.filter((item) => item !== value));
   };
 
   return (
@@ -57,11 +62,48 @@ export const ChiefComplaints = () => {
               fontWeight: "bold",
             }}
           >
+            Previously Added
+          </div>
+          <ul>
+            {chiefComplaints?.map((chiefComplaint) => (
+              <li
+                style={{
+                  color: "#A9ACAC",
+                }}
+              >
+                {chiefComplaint}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {chiefComplaints.length > 0 && (
+        <>
+          <div
+            style={{
+              marginTop: "20px",
+              fontWeight: "bold",
+              color: "#52b6c3",
+            }}
+          >
             Added
           </div>
           <ul>
             {chiefComplaints?.map((chiefComplaint) => (
-              <li>{chiefComplaint}</li>
+              <li
+                style={{
+                  marginBottom: "10px",
+                }}
+              >
+                {chiefComplaint}{" "}
+                <CancelIcon
+                  onClick={() => handleDelete(chiefComplaint)}
+                  style={{
+                    right: "35px",
+                    position: "absolute",
+                  }}
+                />
+              </li>
             ))}
           </ul>
         </>

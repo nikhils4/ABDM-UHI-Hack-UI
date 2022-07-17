@@ -2,12 +2,17 @@ import { TextField, InputAdornment } from "@mui/material";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { useState, useEffect } from "react";
 import { GoToReports } from "./GoToReports";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 export const Diagnosis = () => {
   const [localState, setLocalState] = useState("");
   const [diagnosis, setDiagnosis] = useState(
     JSON.parse(window.localStorage.getItem("diagnosis")) || []
   );
+
+  const handleDelete = (value) => {
+    setDiagnosis(diagnosis.filter((item) => item !== value));
+  };
 
   useEffect(() => {
     window.localStorage.setItem("diagnosis", JSON.stringify(diagnosis));
@@ -56,7 +61,20 @@ export const Diagnosis = () => {
           </div>
           <ul>
             {diagnosis?.map((diagnosis) => (
-              <li>{diagnosis}</li>
+              <li
+                style={{
+                  marginBottom: "10px",
+                }}
+              >
+                {diagnosis}{" "}
+                <CancelIcon
+                  onClick={() => handleDelete(diagnosis)}
+                  style={{
+                    right: "35px",
+                    position: "absolute",
+                  }}
+                />
+              </li>
             ))}
           </ul>
         </>

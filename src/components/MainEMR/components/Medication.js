@@ -2,6 +2,7 @@ import { TextField, InputAdornment } from "@mui/material";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { useState, useEffect } from "react";
 import { GoToReports } from "./GoToReports";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 export const Medication = () => {
   const [localState, setLocalState] = useState("");
@@ -17,6 +18,10 @@ export const Medication = () => {
     if (localState.length <= 0) return;
     setMedication([...medication, localState]);
     setLocalState("");
+  };
+
+  const handleDelete = (value) => {
+    setMedication(medication.filter((item) => item !== value));
   };
 
   return (
@@ -56,7 +61,20 @@ export const Medication = () => {
           </div>
           <ul>
             {medication?.map((medication) => (
-              <li>{medication}</li>
+              <li
+                style={{
+                  marginBottom: "10px",
+                }}
+              >
+                {medication}{" "}
+                <CancelIcon
+                  onClick={() => handleDelete(medication)}
+                  style={{
+                    right: "35px",
+                    position: "absolute",
+                  }}
+                />
+              </li>
             ))}
           </ul>
         </>

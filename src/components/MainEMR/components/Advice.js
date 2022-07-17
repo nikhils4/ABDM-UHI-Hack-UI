@@ -2,12 +2,17 @@ import { TextField, InputAdornment } from "@mui/material";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { useState, useEffect } from "react";
 import { GoToReports } from "./GoToReports";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 export const Advice = () => {
   const [localState, setLocalState] = useState("");
   const [advice, setAdvice] = useState(
     JSON.parse(window.localStorage.getItem("advice")) || []
   );
+
+  const handleDelete = (value) => {
+    setAdvice(advice.filter((item) => item !== value));
+  };
 
   useEffect(() => {
     window.localStorage.setItem("advice", JSON.stringify(advice));
@@ -56,7 +61,20 @@ export const Advice = () => {
           </div>
           <ul>
             {advice?.map((advice) => (
-              <li>{advice}</li>
+              <li
+                style={{
+                  marginBottom: "10px",
+                }}
+              >
+                {advice}{" "}
+                <CancelIcon
+                  onClick={() => handleDelete(advice)}
+                  style={{
+                    right: "35px",
+                    position: "absolute",
+                  }}
+                />
+              </li>
             ))}
           </ul>
         </>
