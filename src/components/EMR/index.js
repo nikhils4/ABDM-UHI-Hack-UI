@@ -44,7 +44,14 @@ export const EMR = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setScreenState("MajorSymptomsSection");
+        setScreenFlow([
+          "Dashboard",
+          "MajorSymptomsSection",
+          "SymptomsSection",
+          "SymptomsDetailsSection",
+          "SymptomsReviewSection",
+        ]);
       });
   }, []);
 
@@ -73,6 +80,9 @@ export const EMR = () => {
             setPainLocation={setPainLocation}
             accompaniedSymptoms={accompaniedSymptoms}
             setAccompaniedSymptoms={setAccompaniedSymptoms}
+            screenFlow={screenFlow}
+            setScreenState={setScreenState}
+            screenState={screenState}
           />
         )}
         {screenState === "SymptomsDetailsSection" && (
@@ -87,6 +97,9 @@ export const EMR = () => {
             setSymptomsInduced={setSymptomsInduced}
             symptomsRelievedBy={symptomsRelievedBy}
             setSymptomsRelievedBy={setSymptomsRelievedBy}
+            screenFlow={screenFlow}
+            setScreenState={setScreenState}
+            screenState={screenState}
           />
         )}
         {screenState === "SymptomsReviewSection" && (

@@ -14,6 +14,9 @@ export const SymptomsDetailsSection = ({
   setSymptomsRelievedBy,
   symptomsDetailData = [],
   setSymptomsDetailData,
+  screenFlow,
+  setScreenState,
+  screenState,
 }) => {
   useEffect(() => {
     fetch("")
@@ -78,6 +81,20 @@ export const SymptomsDetailsSection = ({
     return array.some((data) => data[keyToSearch] === value);
   };
 
+  const handleGoBack = () => {
+    const currentIndex = screenFlow.indexOf(screenState);
+    const newIndex = currentIndex - 1;
+    const newScreenState = screenFlow[newIndex];
+    setScreenState(newScreenState);
+  };
+
+  const handleGoForward = () => {
+    const currentIndex = screenFlow.indexOf(screenState);
+    const newIndex = currentIndex + 1;
+    const newScreenState = screenFlow[newIndex];
+    setScreenState(newScreenState);
+  };
+
   return (
     <>
       <div
@@ -87,6 +104,43 @@ export const SymptomsDetailsSection = ({
           flexDirection: "column",
         }}
       >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <div
+            onClick={handleGoBack}
+            style={{
+              fontWeight: "bold",
+            }}
+          >
+            Back
+          </div>
+          <div
+            style={{
+              flexGrow: 1,
+              border: "2px solid #27C1CD",
+              marginLeft: "10px",
+            }}
+          ></div>
+          <div
+            style={{
+              flexGrow: 1,
+              border: "2px solid #27C1CD",
+              marginRight: "10px",
+            }}
+          ></div>
+          <div
+            style={{
+              fontWeight: "bold",
+            }}
+            onClick={handleGoForward}
+          >
+            Next {">"}
+          </div>
+        </div>
         <h3>Previous Selected Symptoms</h3>
         <div>
           {selectedProminenceOfSymptoms.map(({ symptom }) => (

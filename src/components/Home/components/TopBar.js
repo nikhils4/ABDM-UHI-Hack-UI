@@ -1,4 +1,15 @@
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
+import MomentUtils from "@date-io/moment";
+
+import { useState } from "react";
 export const TopBar = ({ selectedDate }) => {
+  const [value, setValue] = useState(null);
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <div
@@ -22,7 +33,16 @@ export const TopBar = ({ selectedDate }) => {
           flexGrow: "1",
         }}
       >
-        Icon
+        <CalendarMonthIcon
+          onClick={() => {
+            console.log("asfdv");
+            setOpen((isOpen) => !isOpen);
+          }}
+        />
+
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <DatePicker open={open} value={new Date(selectedDate)} />
+        </MuiPickersUtilsProvider>
       </div>
     </>
   );

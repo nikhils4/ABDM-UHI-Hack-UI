@@ -1,7 +1,7 @@
 import { Chip } from "@mui/material";
 
 export const MajorSymptomsSection = ({
-  majorSymptoms,
+  majorSymptoms = [],
   setMajorSymptoms,
   setScreenState,
 }) => {

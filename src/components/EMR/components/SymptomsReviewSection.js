@@ -15,101 +15,111 @@ export const SymptomsReviewSection = ({
           position: "relative",
         }}
       >
-        <div
-          style={{
-            border: "1px solid #4ed8e9",
-            padding: "0px 20px 15px 20px",
-            marginBottom: "15px",
-            boxShadow:
-              "0px 0.15px 0.45px rgba(0, 0, 0, 0.14), 0px 0.8px 1.8px rgba(0, 0, 0, 0.12)",
-            borderRadius: "5px",
-          }}
-        >
-          <h3>Prominence of Symptoms</h3>
-          <div>
-            <ul>
-              {selectedProminenceOfSymptoms.map(({ symptom }) => (
-                <li>{symptom}</li>
-              ))}
-            </ul>
+        {selectedProminenceOfSymptoms.length > 0 && (
+          <div
+            style={{
+              border: "1px solid #4ed8e9",
+              padding: "0px 20px 15px 20px",
+              marginBottom: "15px",
+              boxShadow:
+                "0px 0.15px 0.45px rgba(0, 0, 0, 0.14), 0px 0.8px 1.8px rgba(0, 0, 0, 0.12)",
+              borderRadius: "5px",
+            }}
+          >
+            <h3>Prominence of Symptoms</h3>
+            <div>
+              <ul>
+                {selectedProminenceOfSymptoms.map(({ symptom }) => (
+                  <li>{symptom}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
-        <div
-          style={{
-            border: "1px solid #4ed8e9",
-            padding: "0px 20px 15px 20px",
-            marginBottom: "15px",
-            boxShadow:
-              "0px 0.15px 0.45px rgba(0, 0, 0, 0.14), 0px 0.8px 1.8px rgba(0, 0, 0, 0.12)",
-            borderRadius: "5px",
-          }}
-        >
-          <h3>Pain Located</h3>
-          <div>
-            <ul>
-              {painLocation.map(({ symptom }) => (
-                <li>{symptom}</li>
-              ))}
-            </ul>
+        )}
+        {painLocation.length > 0 && (
+          <div
+            style={{
+              border: "1px solid #4ed8e9",
+              padding: "0px 20px 15px 20px",
+              marginBottom: "15px",
+              boxShadow:
+                "0px 0.15px 0.45px rgba(0, 0, 0, 0.14), 0px 0.8px 1.8px rgba(0, 0, 0, 0.12)",
+              borderRadius: "5px",
+            }}
+          >
+            <h3>Pain Located</h3>
+            <div>
+              <ul>
+                {painLocation.map(({ symptom }) => (
+                  <li>{symptom}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
-        <div
-          style={{
-            border: "1px solid #4ed8e9",
-            padding: "0px 20px 15px 20px",
-            marginBottom: "15px",
-            boxShadow:
-              "0px 0.15px 0.45px rgba(0, 0, 0, 0.14), 0px 0.8px 1.8px rgba(0, 0, 0, 0.12)",
-            borderRadius: "5px",
-          }}
-        >
-          <h3>Accompanied Symptoms</h3>
-          <div>
-            <ul>
-              {accompaniedSymptoms.map(({ symptom }) => (
-                <li>{symptom}</li>
-              ))}
-            </ul>
+        )}
+        {accompaniedSymptoms.length > 0 && (
+          <div
+            style={{
+              border: "1px solid #4ed8e9",
+              padding: "0px 20px 15px 20px",
+              marginBottom: "15px",
+              boxShadow:
+                "0px 0.15px 0.45px rgba(0, 0, 0, 0.14), 0px 0.8px 1.8px rgba(0, 0, 0, 0.12)",
+              borderRadius: "5px",
+            }}
+          >
+            <h3>Accompanied Symptoms</h3>
+            <div>
+              <ul>
+                {accompaniedSymptoms.map(({ symptom }) => (
+                  <li>{symptom}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
-        <div
-          style={{
-            border: "1px solid #4ed8e9",
-            padding: "0px 20px 15px 20px",
-            marginBottom: "15px",
-            boxShadow:
-              "0px 0.15px 0.45px rgba(0, 0, 0, 0.14), 0px 0.8px 1.8px rgba(0, 0, 0, 0.12)",
-            borderRadius: "5px",
-          }}
-        >
-          <h3>Symptoms Induced</h3>
-          <div>
-            <ul>
-              {symptomsInduced.map(({ symptom }) => (
-                <li>{symptom}</li>
-              ))}
-            </ul>
+        )}
+        {symptomsInduced.length > 0 && (
+          <div
+            style={{
+              border: "1px solid #4ed8e9",
+              padding: "0px 20px 15px 20px",
+              marginBottom: "15px",
+              boxShadow:
+                "0px 0.15px 0.45px rgba(0, 0, 0, 0.14), 0px 0.8px 1.8px rgba(0, 0, 0, 0.12)",
+              borderRadius: "5px",
+            }}
+          >
+            <h3>Symptoms Induced</h3>
+            <div>
+              <ul>
+                {symptomsInduced.map(({ symptom }) => (
+                  <li>{symptom}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
-        <div
-          style={{
-            border: "1px solid #4ed8e9",
-            padding: "0px 20px 15px 20px",
-            marginBottom: "15px",
-            boxShadow:
-              "0px 0.15px 0.45px rgba(0, 0, 0, 0.14), 0px 0.8px 1.8px rgba(0, 0, 0, 0.12)",
-            borderRadius: "5px",
-          }}
-        >
-          <h3>Symptoms Relieved By</h3>
-          <div>
-            <ul>
-              {symptomsRelievedBy.map(({ symptom }) => (
-                <li>{symptom}</li>
-              ))}
-            </ul>
+        )}
+        {symptomsRelievedBy.length > 0 && (
+          <div
+            style={{
+              border: "1px solid #4ed8e9",
+              padding: "0px 20px 15px 20px",
+              marginBottom: "15px",
+              boxShadow:
+                "0px 0.15px 0.45px rgba(0, 0, 0, 0.14), 0px 0.8px 1.8px rgba(0, 0, 0, 0.12)",
+              borderRadius: "5px",
+            }}
+          >
+            <h3>Symptoms Relieved By</h3>
+            <div>
+              <ul>
+                {symptomsRelievedBy.map(({ symptom }) => (
+                  <li>{symptom}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
+        )}
         <div
           style={{
             display: "flex",

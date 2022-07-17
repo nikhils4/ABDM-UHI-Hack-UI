@@ -40,6 +40,18 @@ export const MainContent = ({ selectedDate }) => {
         padding: "10px 15px",
       }}
     >
+      <div
+        style={{
+          paddingLeft: "15px",
+          fontSize: "18px",
+          marginBottom: "20px",
+          marginTop: "20px",
+          fontWeight: "bold",
+        }}
+      >
+        {new Date(selectedDate).getDate()}{" "}
+        {selectedDate.toLocaleString("default", { month: "long" })}
+      </div>
       {appointmentList.map((appointment) => {
         return <AppointmentCard appointment={appointment} />;
       })}
