@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const AppointmentCard = ({ appointment }) => {
   const {
@@ -39,27 +39,28 @@ export const AppointmentCard = ({ appointment }) => {
         {gender} {age} | {contactNumber}
       </div>
       <div>{appointmentTime}</div>
-      <Navigate
-        to="/emr?apptId={appointmentId}&name={patientName}&time={appointmentTime}&source={appointmentSource}"
-        replace={true}
-      />
-      <button
-        onCli
-        style={{
-          width: "fit-content",
-          position: "absolute",
-          bottom: "10px",
-          right: "15px",
-          fontSize: "18px",
-          backgroundColor: "#52B6C3",
-          borderRadius: "50px",
-          padding: "10px",
-          color: "white ",
-          border: "none",
-        }}
+      <Link
+        to={`/emr?apptId=${appointmentId}&name=${patientName}&time=${appointmentTime}&source=${appointmentSource}`}
       >
-        + Symptoms
-      </button>
+        {" "}
+        <button
+          style={{
+            width: "fit-content",
+            position: "absolute",
+            bottom: "10px",
+            right: "15px",
+            fontSize: "18px",
+            backgroundColor: "#52B6C3",
+            borderRadius: "50px",
+            padding: "10px",
+            color: "white ",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          + Symptoms
+        </button>
+      </Link>
     </div>
   );
 };

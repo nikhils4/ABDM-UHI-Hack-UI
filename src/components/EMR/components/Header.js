@@ -1,7 +1,7 @@
 import { TopBar } from "./TopBar";
 import { SymptomsTopSection } from "./SymptomsTopSection";
 
-export const Header = ({ screenState }) => {
+export const Header = ({ screenState, screenFlow, setScreenState }) => {
   return (
     <>
       <div
@@ -12,7 +12,11 @@ export const Header = ({ screenState }) => {
           backgroundColor: "#F5FEFF",
         }}
       >
-        <TopBar />
+        <TopBar
+          screenFlow={screenFlow}
+          setScreenState={setScreenState}
+          screenState={screenState}
+        />
       </div>
       <div
         style={{

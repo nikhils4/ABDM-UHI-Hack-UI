@@ -5,6 +5,7 @@ import { SymptomsSection } from "./components/SymptomsSection";
 import { SymptomsDetailsSection } from "./components/SymptomsDetailsSection";
 import { SymptomsReviewSection } from "./components/SymptomsReviewSection";
 import { MajorSymptomsSection } from "./components/MajorSymptomsSection";
+import { Navigate } from "react-router-dom";
 
 export const EMR = () => {
   const [screenState, setScreenState] = useState("home");
@@ -26,6 +27,7 @@ export const EMR = () => {
         if (data.emr.symptoms.length > 0) {
           setScreenState("SymptomsSection");
           setScreenFlow([
+            "Dashboard",
             "SymptomsSection",
             "SymptomsDetailsSection",
             "SymptomsReviewSection",
@@ -33,6 +35,7 @@ export const EMR = () => {
         } else {
           setScreenState("MajorSymptomsSection");
           setScreenFlow([
+            "Dashboard",
             "MajorSymptomsSection",
             "SymptomsSection",
             "SymptomsDetailsSection",
@@ -49,7 +52,12 @@ export const EMR = () => {
     <Grid container>
       <Grid item md={2}></Grid>
       <Grid item xs={12} md={8}>
-        <Header screenState={screenState} screenFlow={screenFlow} />
+        {screenState === "Dashboard" && <Navigate to="/" replace />}
+        <Header
+          screenState={screenState}
+          setScreenState={setScreenState}
+          screenFlow={screenFlow}
+        />
         {screenState === "MajorSymptomsSection" && (
           <MajorSymptomsSection
             setScreenState={setScreenState}

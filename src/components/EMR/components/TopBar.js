@@ -1,10 +1,22 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-export const TopBar = ({ selectedDate }) => {
+export const TopBar = ({ screenFlow, setScreenState, screenState }) => {
+  const handleGoBack = () => {
+    const currentIndex = screenFlow.indexOf(screenState);
+    const newIndex = currentIndex - 1;
+    const newScreenState = screenFlow[newIndex];
+    setScreenState(newScreenState);
+  };
+
   return (
     <>
       <div>
-        <ArrowBackIosIcon />
+        <ArrowBackIosIcon
+          onClick={handleGoBack}
+          style={{
+            cursor: "pointer",
+          }}
+        />
       </div>
       <div
         style={{

@@ -91,9 +91,24 @@ export const MajorSymptomsSection = ({
             + Add Symptom
           </span>
         </div>
-        <div onClick={() => setScreenState("SymptomsSection")}>
+        <button
+          style={{
+            width: "fit-content",
+            fontSize: "14px",
+            fontWeight: "bold",
+            marginTop: "40px",
+            backgroundColor: "#52B6C3",
+            borderRadius: "50px",
+            padding: "10px",
+            color: "white ",
+            border: "none",
+            cursor: "pointer",
+            alignSelf: "center",
+          }}
+          onClick={() => setScreenState("SymptomsSection")}
+        >
           Save and proceed
-        </div>
+        </button>
       </div>
     </>
   );
