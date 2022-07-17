@@ -1,6 +1,7 @@
 import { TextField, InputAdornment } from "@mui/material";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { useState, useEffect } from "react";
+import { GoToReports } from "./GoToReports";
 
 export const ChiefComplaints = () => {
   const [localState, setLocalState] = useState("");
@@ -26,11 +27,13 @@ export const ChiefComplaints = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        padding: "10px 20px",
+        padding: "10px 25px",
         flexGrow: 1,
         width: "100%",
       }}
     >
+      <GoToReports />
+
       <h3>Chief Complaints</h3>
       <TextField
         width="100%"

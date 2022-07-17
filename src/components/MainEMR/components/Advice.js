@@ -1,6 +1,7 @@
 import { TextField, InputAdornment } from "@mui/material";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { useState, useEffect } from "react";
+import { GoToReports } from "./GoToReports";
 
 export const Advice = () => {
   const [localState, setLocalState] = useState("");
@@ -23,10 +24,11 @@ export const Advice = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        padding: "10px 20px",
+        padding: "10px 25px",
         flexGrow: 1,
       }}
     >
+      <GoToReports />
       <h3>Advice</h3>
       <TextField
         width="100%"

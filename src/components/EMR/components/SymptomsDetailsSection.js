@@ -114,6 +114,7 @@ export const SymptomsDetailsSection = ({
             onClick={handleGoBack}
             style={{
               fontWeight: "bold",
+              cursor: "pointer",
             }}
           >
             Back
@@ -135,6 +136,7 @@ export const SymptomsDetailsSection = ({
           <div
             style={{
               fontWeight: "bold",
+              cursor: "pointer",
             }}
             onClick={handleGoForward}
           >
