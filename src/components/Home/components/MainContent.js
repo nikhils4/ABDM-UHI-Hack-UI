@@ -12,9 +12,9 @@ export const MainContent = ({ selectedDate }) => {
     fetch(
       `https://uhi-hack.herokuapp.com/appointment/list?date=${new Date(
         selectedDate
-      ).getFullYear()}-${new Date(selectedDate).getMonth() + 1}-${
-        new Date(selectedDate).getDate() - 1
-      }`
+      ).getFullYear()}-${new Date(selectedDate).getMonth() + 1}-${new Date(
+        selectedDate
+      ).getDate()}`
     )
       .then((res) => res.json())
       .then((data) => {
