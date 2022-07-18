@@ -19,7 +19,7 @@ export const Advice = () => {
   }, [advice]);
 
   const handleSymptomsAdd = () => {
-    if (localState.length <= 0) return;
+    if (localState?.length <= 0) return;
     setAdvice([...advice, localState]);
     setLocalState("");
   };
@@ -49,7 +49,7 @@ export const Advice = () => {
           ),
         }}
       />
-      {advice.length > 0 && (
+      {advice?.length > 0 && (
         <>
           <div
             style={{

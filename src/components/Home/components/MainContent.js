@@ -131,7 +131,7 @@ export const MainContent = ({ selectedDate }) => {
         {new Date(selectedDate).getDate()}{" "}
         {selectedDate.toLocaleString("default", { month: "long" })}
       </div>
-      {appointmentList.length > 0 ? (
+      {appointmentList?.length > 0 ? (
         appointmentList.map((appointment) => {
           return <AppointmentCard appointment={appointment} />;
         })

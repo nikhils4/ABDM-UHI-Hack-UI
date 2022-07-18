@@ -15,7 +15,7 @@ export const Medication = () => {
   }, [medication]);
 
   const handleSymptomsAdd = () => {
-    if (localState.length <= 0) return;
+    if (localState?.length <= 0) return;
     setMedication([...medication, localState]);
     setLocalState("");
   };
@@ -49,7 +49,7 @@ export const Medication = () => {
           ),
         }}
       />
-      {medication.length > 0 && (
+      {medication?.length > 0 && (
         <>
           <div
             style={{

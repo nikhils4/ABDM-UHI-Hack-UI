@@ -161,6 +161,7 @@ export default function BasicTabs() {
           Report and Records
         </Grid>
       </Grid>
+
       <Box
         sx={{ borderBottom: 1, borderColor: "divider", textAlign: "center" }}
       >
@@ -332,7 +333,7 @@ const renderMedical = (medical, idx) => {
   return keys.map((key) => {
     return (
       <>
-        {medical[key].length > 0 && (
+        {medical[key]?.length > 0 && (
           <div
             style={{
               display: "flex",

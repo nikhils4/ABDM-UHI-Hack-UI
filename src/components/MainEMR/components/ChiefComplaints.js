@@ -18,7 +18,7 @@ export const ChiefComplaints = () => {
   }, [chiefComplaints]);
 
   const handleSymptomsAdd = () => {
-    if (localState.length <= 0) return;
+    if (localState?.length <= 0) return;
     setChiefComplaints([...chiefComplaints, localState]);
     setLocalState("");
   };
@@ -57,7 +57,7 @@ export const ChiefComplaints = () => {
           ),
         }}
       />
-      {majorSymptoms.length > 0 && (
+      {majorSymptoms?.length > 0 && (
         <>
           <div
             style={{
@@ -80,7 +80,7 @@ export const ChiefComplaints = () => {
           </ul>
         </>
       )}
-      {chiefComplaints.length > 0 && (
+      {chiefComplaints?.length > 0 && (
         <>
           <div
             style={{

@@ -82,7 +82,7 @@ export const SymptomsReviewSection = ({
           position: "relative",
         }}
       >
-        {selectedProminenceOfSymptoms.length > 0 && (
+        {selectedProminenceOfSymptoms?.length > 0 && (
           <div
             style={{
               border: "1px solid #4ed8e9",
@@ -103,7 +103,7 @@ export const SymptomsReviewSection = ({
             </div>
           </div>
         )}
-        {painLocation.length > 0 && (
+        {painLocation?.length > 0 && (
           <div
             style={{
               border: "1px solid #4ed8e9",
@@ -124,7 +124,7 @@ export const SymptomsReviewSection = ({
             </div>
           </div>
         )}
-        {accompaniedSymptoms.length > 0 && (
+        {accompaniedSymptoms?.length > 0 && (
           <div
             style={{
               border: "1px solid #4ed8e9",
@@ -145,7 +145,7 @@ export const SymptomsReviewSection = ({
             </div>
           </div>
         )}
-        {symptomsInduced.length > 0 && (
+        {symptomsInduced?.length > 0 && (
           <div
             style={{
               border: "1px solid #4ed8e9",
@@ -166,7 +166,7 @@ export const SymptomsReviewSection = ({
             </div>
           </div>
         )}
-        {symptomsRelievedBy.length > 0 && (
+        {symptomsRelievedBy?.length > 0 && (
           <div
             style={{
               border: "1px solid #4ed8e9",

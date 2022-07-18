@@ -19,7 +19,7 @@ export const Diagnosis = () => {
   }, [diagnosis]);
 
   const handleSymptomsAdd = () => {
-    if (localState.length <= 0) return;
+    if (localState?.length <= 0) return;
     setDiagnosis([...diagnosis, localState]);
     setLocalState("");
   };
@@ -49,7 +49,7 @@ export const Diagnosis = () => {
           ),
         }}
       />
-      {diagnosis.length > 0 && (
+      {diagnosis?.length > 0 && (
         <>
           <div
             style={{

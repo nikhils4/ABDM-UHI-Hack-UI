@@ -49,7 +49,7 @@ export const EMR = () => {
     fetch(`https://uhi-hack.herokuapp.com/appointment/${apptId}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.emr.symptoms.length > 0) {
+        if (data.emr.symptoms?.length > 0) {
           setScreenState("SymptomsSection");
           setMajorSymptoms(formatData(data.emr.symptoms));
           setScreenFlow([
