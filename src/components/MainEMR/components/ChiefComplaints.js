@@ -29,7 +29,7 @@ export const ChiefComplaints = () => {
 
   const majorSymptoms = JSON.parse(
     localStorage.getItem("consultationData")
-  ).majorSymptoms;
+  )?.majorSymptoms;
 
   return (
     <div
