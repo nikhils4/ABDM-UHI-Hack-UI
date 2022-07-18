@@ -56,31 +56,23 @@ const renderDocumentCard = (cur, title) => {
         background: "#CDF8FF",
         padding: 12,
         textAlign: "center",
+        position: "relative",
       }}
     >
-      {/* <div
+      <div
         style={{
           height: "200px",
           width: "200px",
+          position: "absolute",
         }}
         onClick={() => handleOpenPdf(cur.base64)}
-      > */}
+      ></div>
       <object
         height={200}
         width={200}
         data={cur.base64}
         type="application/pdf"
       ></object>
-      {/* </div> */}
-      {/* <img
-        src={
-          cur?.base64
-            ? 
-            : "https://cdn.techjockey.com/blog/wp-content/uploads/2017/02/9.png"
-        }
-        height={200}
-        width={200}
-      /> */}
       <br />
       <span>
         {title} {new Date(cur.documentDate).getFullYear()}-
