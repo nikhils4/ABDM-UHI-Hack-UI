@@ -5,65 +5,8 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-
-const Records = [
-  {
-    med: "Hemoglobin",
-    qt: "13.0 - 17.0 g/dl",
-    status: "Normal",
-    value: "15.20",
-    color: "#366327",
-  },
-  {
-    med: "RBC Count",
-    qt: "3.0 - 6.0 mill/mm3",
-    status: "Good",
-    value: "1.20",
-    color: "#82AF73",
-  },
-  {
-    med: "MCV",
-    qt: "13.0 - 1.0 g/dl",
-    status: "Average",
-    value: "9.20",
-    color: "#4ED8E9",
-  },
-  {
-    med: "MCH",
-    qt: "13.0 - 17.0 g/dl",
-    status: "Normal",
-    value: "1.20",
-    color: "#366327",
-  },
-  {
-    med: "MCH",
-    qt: "13.0 - 17.0 g/dl",
-    status: "Normal",
-    value: "15.20",
-    color: "#366327",
-  },
-  {
-    med: "MCH-v1",
-    qt: "13.0 - 17.0 g/dl",
-    status: "Below Normal",
-    value: "15.20",
-    color: "red",
-  },
-  {
-    med: "Fungus",
-    qt: "13.0 - 17.0 g/dl",
-    status: "Normal",
-    value: "55.20",
-    color: "#366327",
-  },
-  {
-    med: "Diabetes",
-    qt: "13.0 - 17.0 g/dl",
-    status: "Good",
-    value: "12.20",
-    color: "#82AF73",
-  },
-];
+import { useEffect, useState } from "react";
+import Skeleton from "@mui/material/Skeleton";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -98,78 +41,103 @@ function a11yProps(index) {
   };
 }
 
-const Documents = (cur, idx) => (
-  <div
-    style={{
-      flexBasis: 200,
-      flexShrink: 0,
-      height: 220,
-      borderRadius: 10,
-      marginRight: 20,
-      background: "#CDF8FF",
-      padding: 12,
-      textAlign: "center",
-    }}
-  >
-    <img
-      src={
-        idx % 2 == 0
-          ? "https://images.template.net/wp-content/uploads/2019/05/Medical-Claims-and-Doctore-Prescription-for-Drugs-Download.jpg"
-          : "https://cdn.techjockey.com/blog/wp-content/uploads/2017/02/9.png"
-      }
-      height={200}
-      width={200}
-    />
-    <br />
-    <span>Prescription 20-10-22</span>
-    <br />
-  </div>
-);
+const renderDocumentCard = (cur, title) => {
+  const handleOpenPdf = (base64) => {
+    console.log("open");
+    window.open(encodeURI(base64));
+  };
+  return (
+    <div
+      style={{
+        flexBasis: 200,
+        flexShrink: 0,
+        height: 220,
+        borderRadius: 10,
+        marginRight: 20,
+        background: "#CDF8FF",
+        padding: 12,
+        textAlign: "center",
+      }}
+    >
+      {/* <div
+        style={{
+          height: "200px",
+          width: "200px",
+        }}
+        onClick={() => handleOpenPdf(cur.base64)}
+      > */}
+      <object
+        height={200}
+        width={200}
+        data={cur.base64}
+        type="application/pdf"
+      ></object>
+      {/* </div> */}
+      {/* <img
+        src={
+          cur?.base64
+            ? 
+            : "https://cdn.techjockey.com/blog/wp-content/uploads/2017/02/9.png"
+        }
+        height={200}
+        width={200}
+      /> */}
+      <br />
+      <span>
+        {title} {new Date(cur.documentDate).getFullYear()}-
+        {new Date(cur.documentDate).getMonth() + 1}-
+        {new Date(cur.documentDate).getDate()}
+      </span>
+      <br />
+    </div>
+  );
+};
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
 
+  let url_string = window.location.href;
+  let url = new URL(url_string);
+  const patientId = url.searchParams.get("patientId");
+
+  const [recordsData, setRecordsData] = useState([]);
+  const [medicalData, setMedicalData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  useEffect(() => {
+    setIsLoading(true);
+    fetch(
+      `https://uhi-hack.herokuapp.com/document/report?patientId=${patientId}`
+    )
+      .then((res) => res.json())
+      .then((res) => setRecordsData(res))
+      .catch((err) => console.log(err))
+      .finally(() =>
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2500)
+      );
+  }, []);
 
-  const renderRecords = () => {
-    return Records.map((curr, idx) => (
-      <>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: 10,
-            alignItems: "center",
-          }}
-        >
-          <div>
-            {curr.med}
-            <br />
-            {curr.qt}
-          </div>
-          <div style={{ textAlign: "end" }}>
-            <span style={{ color: curr.color, fontWeight: "700" }}>
-              {curr.status}
-            </span>
-            <br />
-            {curr.value}
-          </div>
-        </div>
-        {idx !== Records.length - 1 && (
-          <div
-            style={{
-              height: 1,
-              width: "100%",
-              background: "#4b4b4b",
-              margin: "10px 0",
-            }}
-          ></div>
-        )}{" "}
-      </>
-    ));
-  };
+  useEffect(() => {
+    setIsLoading(true);
+
+    fetch(
+      `https://uhi-hack.herokuapp.com/document/medical?patientId=${patientId}`
+    )
+      .then((res) => res.json())
+      .then((res) => setMedicalData(res))
+      .catch((err) => console.log(err))
+      .finally(() =>
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2500)
+      );
+  }, []);
+
   return (
     <Box sx={{ width: "100%", overflow: "scroll" }}>
       <Grid container>
@@ -191,6 +159,7 @@ export default function BasicTabs() {
               position: "absolute",
               float: "left",
               left: "25px",
+              cursor: "pointer",
             }}
             onClick={() => {
               window.history.back();
@@ -205,44 +174,277 @@ export default function BasicTabs() {
         sx={{ borderBottom: 1, borderColor: "divider", textAlign: "center" }}
       >
         <Tabs
-          TabIndicatorProps={{ style: { backgroundColor: "#52B6C3" } }}
+          TabIndicatorProps={{
+            style: {
+              backgroundColor: "#52B6C3",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            },
+          }}
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
+          centered
         >
           <Tab
             autoCapitalize={false}
-            style={{ width: "50%", color: "#4b4b4b" }}
-            fullWidth={true}
-            label="Records"
-            tez
-            {...a11yProps(0)}
-          />
-          <Tab
-            autoCapitalize={false}
-            style={{ width: "50%", color: "#4b4b4b" }}
+            style={{ flexGrow: 1, color: "#4b4b4b" }}
             fullWidth={true}
             label="Reports"
             {...a11yProps(1)}
           />
+          <Tab
+            autoCapitalize={false}
+            style={{ color: "#4b4b4b", flexGrow: 1 }}
+            fullWidth={true}
+            label="Medical Records"
+            tez
+            {...a11yProps(0)}
+          />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
-        <div style={{ display: "flex", overflowX: "auto", width: "100%" }}>
-          {Array(5).fill("").map(Documents)}
+      {isLoading ? (
+        <div
+          style={{
+            padding: "25px",
+          }}
+        >
+          {" "}
+          <Skeleton
+            variant="rectangular"
+            width={"100%"}
+            height={118}
+            style={{
+              marginBottom: "10px",
+            }}
+          />
+          <Skeleton
+            variant="rectangular"
+            width={"100%"}
+            height={118}
+            style={{
+              marginBottom: "10px",
+            }}
+          />
+          <Skeleton
+            variant="rectangular"
+            width={"100%"}
+            height={118}
+            style={{
+              marginBottom: "10px",
+            }}
+          />
+          <Skeleton
+            variant="rectangular"
+            width={"100%"}
+            height={118}
+            style={{
+              marginBottom: "10px",
+            }}
+          />
+          <Skeleton
+            variant="rectangular"
+            width={"100%"}
+            height={118}
+            style={{
+              marginBottom: "10px",
+            }}
+          />
         </div>
-        <br />
-        <h3 style={{ color: "#4b4b4b" }}>Records Analysis</h3>
-        {renderRecords()}
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <div style={{ display: "flex", overflowX: "auto", width: "100%" }}>
-          {Array(5).fill("").map(Documents)}
-        </div>
-        <br />
-        <h3 style={{ color: "#4b4b4b" }}>Records Analysis</h3>
-        {renderRecords()}
-      </TabPanel>
+      ) : (
+        <>
+          <TabPanel value={value} index={0}>
+            <div style={{ display: "flex", overflowX: "auto", width: "100%" }}>
+              {recordsData.map((ele) => renderDocumentCard(ele, "Report"))}
+            </div>
+            <br />
+            <h3 style={{ color: "#4b4b4b" }}>Reports Analysis</h3>
+            {recordsData.map(({ report }, idx) => {
+              return (
+                <>
+                  <div
+                    key={idx}
+                    style={{
+                      marginTop: "20px",
+                    }}
+                  >
+                    <p style={{ color: "#4b4b4b", fontWeight: "bold" }}>
+                      {new Date(report.documentDate).toLocaleString("default", {
+                        month: "long",
+                      })}{" "}
+                      {new Date(report.documentDate).getDate()},{" "}
+                      {new Date(report.documentDate).getFullYear()}
+                    </p>
+                  </div>
+                  {renderRecords(report, idx)}
+                </>
+              );
+            })}
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <div style={{ display: "flex", overflowX: "auto", width: "100%" }}>
+              {medicalData.map((ele) => {
+                return <>{renderDocumentCard(ele, "Prescription")}</>;
+              })}
+            </div>
+            <br />
+            <h3 style={{ color: "#4b4b4b" }}>Medical Records Analysis</h3>
+            {medicalData.map((data, idx) => {
+              const { provisionalDiagnosis, medication, symptoms, advice } =
+                data;
+              return (
+                <>
+                  <p style={{ color: "#4b4b4b", fontWeight: "bold" }}>
+                    {new Date(data.documentDate).toLocaleString("default", {
+                      month: "long",
+                    })}{" "}
+                    {new Date(data.documentDate).getDate()},{" "}
+                    {new Date(data.documentDate).getFullYear()}
+                  </p>
+                  {renderMedical(
+                    {
+                      provisionalDiagnosis,
+                      medication,
+                      symptoms,
+                      advice,
+                    },
+                    idx
+                  )}
+                </>
+              );
+            })}
+          </TabPanel>
+        </>
+      )}
     </Box>
   );
 }
+
+const renderMedical = (medical, idx) => {
+  const keys = Object.keys(medical);
+  // console.log({
+  //   keys,
+  //   report,
+  //   hello: report[key],
+  // });
+
+  const getFormattedKey = (key) => {
+    if (key === "provisionalDiagnosis") {
+      return "Provisional Diagnosis";
+    }
+    if (key === "medication") {
+      return "Medication";
+    }
+    if (key === "symptoms") {
+      return "Chied Complaints";
+    }
+    if (key === "advice") {
+      return "Advice";
+    }
+  };
+
+  return keys.map((key) => {
+    console.log({
+      medical,
+      key,
+    });
+    // if (key === "documentDate") {
+    //   return (
+    //     <div key={idx}>
+    //       <h3 style={{ color: "#4b4b4b" }}>{key}</h3>
+    //       <p style={{ color: "#4b4b4b" }}>{report[key]}</p>
+    //     </div>
+    //   );
+    // }
+    return (
+      <>
+        {medical[key].length > 0 && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "10px",
+              alignItems: "center",
+              borderBottom: "1px solid #4b4b4b",
+            }}
+          >
+            <div>
+              {getFormattedKey(key)}
+              <br />
+              <ul>
+                {medical[key].map((ele) => {
+                  console.log({ ele });
+                  return <li>{ele}</li>;
+                })}
+              </ul>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  });
+};
+
+const renderRecords = (report, idx) => {
+  const keys = Object.keys(report);
+  // console.log({
+  //   keys,
+  //   report,
+  //   hello: report[key],
+  // });
+
+  // if (key === "documentDate") {
+  //   return (
+  // <div key={idx}>
+  //   <h3 style={{ color: "#4b4b4b" }}>{key}</h3>
+  //   <p style={{ color: "#4b4b4b" }}>{report[key]}</p>
+  // </div>
+  //   );
+  // }
+
+  return keys.map((key) => {
+    if (key === "documentDate") {
+      return null;
+    }
+    return (
+      <>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "10px",
+            alignItems: "center",
+            borderBottom: "1px solid #4b4b4b",
+          }}
+        >
+          <div>
+            {key}
+            <br />
+            {Number(report[key].lowRange)} - {Number(report[key].highRange)}
+          </div>
+          <div style={{ textAlign: "end" }}>
+            <span
+              style={{
+                color:
+                  Number(report[key].value) > Number(report[key].highRange) ||
+                  Number(report[key].value) < Number(report[key].lowRange)
+                    ? "red"
+                    : "green",
+                fontWeight: "700",
+              }}
+            >
+              {Number(report[key].value) > Number(report[key].highRange)
+                ? "Above normal"
+                : Number(report[key].value) < Number(report[key].lowRange)
+                ? "Below normal"
+                : "Normal"}
+            </span>
+            <br />
+            {Number(report[key].value)}
+          </div>
+        </div>
+      </>
+    );
+  });
+};

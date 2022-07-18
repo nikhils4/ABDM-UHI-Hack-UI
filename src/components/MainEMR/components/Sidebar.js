@@ -41,6 +41,7 @@ export const Sidebar = ({ setMainEmrScreenState }) => {
               lineHeight: "20px",
               transform: "translate(-50%, -50%)",
               fontWeight: "bold",
+              cursor: "pointer",
             }}
           >
             {"<"}
@@ -63,24 +64,25 @@ export const Sidebar = ({ setMainEmrScreenState }) => {
         style={{
           height: "50px",
           lineHeight: "50px",
+          cursor: "pointer",
         }}
       >
         C
       </div>
       <div
-        style={{ height: "50px", lineHeight: "50px" }}
+        style={{ height: "50px", lineHeight: "50px", cursor: "pointer" }}
         onClick={() => setMainEmrScreenState("Diagnosis")}
       >
         D
       </div>
       <div
-        style={{ height: "50px", lineHeight: "50px" }}
+        style={{ height: "50px", lineHeight: "50px", cursor: "pointer" }}
         onClick={() => setMainEmrScreenState("Medication")}
       >
         M
       </div>
       <div
-        style={{ height: "50px", lineHeight: "50px" }}
+        style={{ height: "50px", lineHeight: "50px", cursor: "pointer" }}
         onClick={() => setMainEmrScreenState("Advice")}
         Medication
       >

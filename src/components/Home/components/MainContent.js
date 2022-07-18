@@ -47,6 +47,7 @@ export const MainContent = ({ selectedDate }) => {
           appointmentId: appointment.appointmentId,
           emrId: appointment.emrId,
           status: appointment.status,
+          patientId: appointment.patientId,
         };
       }
     });

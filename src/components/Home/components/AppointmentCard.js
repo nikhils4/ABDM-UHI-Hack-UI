@@ -11,6 +11,7 @@ export const AppointmentCard = ({ appointment }) => {
     appointmentId,
     emrId,
     status,
+    patientId,
   } = appointment;
   const navigate = useNavigate();
   return (
@@ -62,13 +63,13 @@ export const AppointmentCard = ({ appointment }) => {
         </button>
       ) : (
         <Link
-          to={`/emr?apptId=${appointmentId}&emrId=${emrId}&name=${patientName}&time=${appointmentTime}&source=${appointmentSource}`}
+          to={`/emr?apptId=${appointmentId}&emrId=${emrId}&name=${patientName}&time=${appointmentTime}&source=${appointmentSource}&patientId=${patientId}`}
         >
           {" "}
           <button
             onClick={(status) => {
               if (status === "act") {
-                navigate(`/mainEmr?emrId=${emrId}`);
+                navigate(`/mainEmr?emrId=${emrId}&patientId=${patientId}`);
               } else {
                 navigate(
                   `/emr?apptId=${appointmentId}&emrId=${emrId}&name=${patientName}&time=${appointmentTime}&source=${appointmentSource}`

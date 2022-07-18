@@ -53,6 +53,7 @@ export const SymptomsReviewSection = ({
     let url_string = window.location.href;
     let url = new URL(url_string);
     const emrId = url.searchParams.get("emrId");
+    const patientId = url.searchParams.get("patientId");
     fetch("https://uhi-hack.herokuapp.com/emr/updateEmrReceptionist", {
       method: "POST",
       headers: {
@@ -68,7 +69,7 @@ export const SymptomsReviewSection = ({
         ],
       }),
     });
-    navigate(`/mainEmr?emrId=${emrId}`);
+    navigate(`/mainEmr?emrId=${emrId}&patientId=${patientId}`);
   };
 
   return (

@@ -5,7 +5,10 @@ export const GoToReports = () => {
   return (
     <div
       onClick={() => {
-        navigate("/patient-reports");
+        let url_string = window.location.href;
+        let url = new URL(url_string);
+        const patientId = url.searchParams.get("patientId");
+        navigate("/patient-reports?patientId=" + patientId);
       }}
       style={{
         margin: "15px 0px",

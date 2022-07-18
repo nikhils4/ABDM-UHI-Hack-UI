@@ -92,6 +92,7 @@ export const MainEMR = () => {
             width: "100%",
             textAlign: "center",
             fontWeight: "bold",
+            cursor: "pointer",
           }}
           onClick={handleSaveConsultation}
         >
