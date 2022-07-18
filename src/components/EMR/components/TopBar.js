@@ -49,7 +49,9 @@ export const TopBar = ({
         <div style={{ paddingBottom: "5px" }}>
           {name} | By {apptSource}
         </div>
-        <div style={{ flexGrow: 1 }}>Appointment scheduled at {apptTime}</div>
+        <div style={{ flexGrow: 1 }}>
+          Appointment scheduled at {apptTime?.split("-")[0]}
+        </div>
       </div>
     </>
   );

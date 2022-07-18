@@ -8,21 +8,33 @@ import { MajorSymptomsSection } from "./components/MajorSymptomsSection";
 import { Navigate } from "react-router-dom";
 
 export const EMR = () => {
-  const [screenState, setScreenState] = useState("home");
-  const [majorSymptoms, setMajorSymptoms] = useState([]);
-  const [selectedProminenceOfSymptoms, setSelectedProminenceOfSymptoms] =
-    useState([]);
-  const [painLocation, setPainLocation] = useState([]);
-  const [accompaniedSymptoms, setAccompaniedSymptoms] = useState([]);
-  const [symptomsInduced, setSymptomsInduced] = useState([]);
-  const [symptomsRelievedBy, setSymptomsRelievedBy] = useState([]);
-  const [screenFlow, setScreenFlow] = useState([]);
   let url_string = window.location.href;
   let url = new URL(url_string);
   const apptId = url.searchParams.get("apptId");
   const name = url.searchParams.get("name");
   const apptSource = url.searchParams.get("source");
   const apptTime = url.searchParams.get("time");
+
+  const [screenState, setScreenState] = useState("home");
+  const [majorSymptoms, setMajorSymptoms] = useState([]);
+  const [selectedProminenceOfSymptoms, setSelectedProminenceOfSymptoms] =
+    useState(
+      JSON.parse(localStorage.getItem(apptId))?.selectedProminenceOfSymptoms ||
+        []
+    );
+  const [painLocation, setPainLocation] = useState(
+    JSON.parse(localStorage.getItem(apptId))?.painLocation || []
+  );
+  const [accompaniedSymptoms, setAccompaniedSymptoms] = useState(
+    JSON.parse(localStorage.getItem(apptId))?.accompaniedSymptoms || []
+  );
+  const [symptomsInduced, setSymptomsInduced] = useState(
+    JSON.parse(localStorage.getItem(apptId))?.symptomsInduced || []
+  );
+  const [symptomsRelievedBy, setSymptomsRelievedBy] = useState(
+    JSON.parse(localStorage.getItem(apptId))?.symptomsRelievedBy || []
+  );
+  const [screenFlow, setScreenFlow] = useState([]);
 
   const formatData = (array) => {
     return array.map((name) => {

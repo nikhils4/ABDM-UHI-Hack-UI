@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export const Sidebar = ({ setMainEmrScreenState }) => {
+  const navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -26,6 +30,21 @@ export const Sidebar = ({ setMainEmrScreenState }) => {
             backgroundColor: "#4ed8e9",
           }}
         >
+          <div
+            onClick={() => {
+              window.history.back();
+            }}
+            style={{
+              position: "absolute",
+              top: "-100%",
+              left: "50%",
+              lineHeight: "20px",
+              transform: "translate(-50%, -50%)",
+              fontWeight: "bold",
+            }}
+          >
+            {"<"}
+          </div>
           <div
             style={{
               position: "absolute",

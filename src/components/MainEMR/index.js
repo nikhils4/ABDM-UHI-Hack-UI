@@ -22,6 +22,7 @@ export const MainEMR = () => {
     let url_string = window.location.href;
     let url = new URL(url_string);
     const emrId = url.searchParams.get("emrId");
+    const apptId = url.searchParams.get("apptId");
     fetch("https://uhi-hack.herokuapp.com/emr/updateEmrDoctor", {
       method: "POST",
       headers: {
@@ -31,31 +32,35 @@ export const MainEMR = () => {
         emrId,
         symptoms: [
           ...getFormattedData(
-            JSON.parse(
-              localStorage.getItem("consultationData") || JSON.stringify([])
-            )?.majorSymptoms
+            JSON.parse(localStorage.getItem(apptId) || JSON.stringify([]))
+              ?.majorSymptoms
           ),
           ...JSON.parse(
-            window.localStorage.getItem("chiefComplaints") || JSON.stringify([])
+            window.localStorage.getItem(apptId) || JSON.stringify([])
           ),
         ],
         provisionalDiagnosis: [
           ...JSON.parse(
-            window.localStorage.getItem("diagnosis") || JSON.stringify([])
+            window.localStorage.getItem(apptId) || JSON.stringify([])
           ),
         ],
         advice: [
           ...JSON.parse(
-            window.localStorage.getItem("advice") || JSON.stringify([])
+            window.localStorage.getItem(apptId) || JSON.stringify([])
           ),
         ],
         medication: [
           ...JSON.parse(
-            window.localStorage.getItem("medication") || JSON.stringify([])
+            window.localStorage.getItem(apptId) || JSON.stringify([])
           ),
         ],
       }),
     });
+    window.localStorage.removeItem("chiefComplaints");
+    window.localStorage.removeItem("diagnosis");
+    window.localStorage.removeItem("advice");
+    window.localStorage.removeItem("medication");
+    window.localStorage.removeItem(apptId);
     navigate("/");
   };
 
@@ -83,7 +88,7 @@ export const MainEMR = () => {
             left: "50%",
             padding: "25px 0",
             transform: "translateX(-50%)",
-            backgroundColor: "#F5FEFF",
+            backgroundColor: "rgb(78, 216, 233)",
             width: "100%",
             textAlign: "center",
             fontWeight: "bold",

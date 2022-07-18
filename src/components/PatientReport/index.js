@@ -4,6 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 
 const Records = [
   {
@@ -11,65 +12,57 @@ const Records = [
     qt: "13.0 - 17.0 g/dl",
     status: "Normal",
     value: "15.20",
-    color: "#366327"
+    color: "#366327",
   },
   {
     med: "RBC Count",
     qt: "3.0 - 6.0 mill/mm3",
     status: "Good",
     value: "1.20",
-    color: "#82AF73"
-
+    color: "#82AF73",
   },
   {
     med: "MCV",
     qt: "13.0 - 1.0 g/dl",
     status: "Average",
     value: "9.20",
-    color: "#4ED8E9"
-
+    color: "#4ED8E9",
   },
   {
     med: "MCH",
     qt: "13.0 - 17.0 g/dl",
     status: "Normal",
     value: "1.20",
-    color: "#366327"
-
+    color: "#366327",
   },
   {
     med: "MCH",
     qt: "13.0 - 17.0 g/dl",
     status: "Normal",
     value: "15.20",
-    color: "#366327"
-
+    color: "#366327",
   },
   {
     med: "MCH-v1",
     qt: "13.0 - 17.0 g/dl",
     status: "Below Normal",
     value: "15.20",
-    color: "red"
-
+    color: "red",
   },
   {
     med: "Fungus",
     qt: "13.0 - 17.0 g/dl",
     status: "Normal",
     value: "55.20",
-    color: "#366327"
-
+    color: "#366327",
   },
   {
     med: "Diabetes",
     qt: "13.0 - 17.0 g/dl",
     status: "Good",
     value: "12.20",
-    color: "#82AF73"
-
+    color: "#82AF73",
   },
-  
 ];
 
 function TabPanel(props) {
@@ -105,7 +98,7 @@ function a11yProps(index) {
   };
 }
 
-const Documents = (cur,idx) => (
+const Documents = (cur, idx) => (
   <div
     style={{
       flexBasis: 200,
@@ -115,18 +108,21 @@ const Documents = (cur,idx) => (
       marginRight: 20,
       background: "#CDF8FF",
       padding: 12,
-textAlign:'center'
+      textAlign: "center",
     }}
   >
-  <img src={idx%2==0? "https://images.template.net/wp-content/uploads/2019/05/Medical-Claims-and-Doctore-Prescription-for-Drugs-Download.jpg":
-  "https://cdn.techjockey.com/blog/wp-content/uploads/2017/02/9.png"}
-
-  height={200}
-  width={200}
-  />
-  <br/>
-  <span>Prescription 20-10-22</span>
-  <br/>
+    <img
+      src={
+        idx % 2 == 0
+          ? "https://images.template.net/wp-content/uploads/2019/05/Medical-Claims-and-Doctore-Prescription-for-Drugs-Download.jpg"
+          : "https://cdn.techjockey.com/blog/wp-content/uploads/2017/02/9.png"
+      }
+      height={200}
+      width={200}
+    />
+    <br />
+    <span>Prescription 20-10-22</span>
+    <br />
   </div>
 );
 
@@ -153,8 +149,10 @@ export default function BasicTabs() {
             <br />
             {curr.qt}
           </div>
-          <div style={{textAlign:'end'}}>
-            <span style={{ color: curr.color ,fontWeight:'700'}}>{curr.status}</span>
+          <div style={{ textAlign: "end" }}>
+            <span style={{ color: curr.color, fontWeight: "700" }}>
+              {curr.status}
+            </span>
             <br />
             {curr.value}
           </div>
@@ -174,7 +172,38 @@ export default function BasicTabs() {
   };
   return (
     <Box sx={{ width: "100%", overflow: "scroll" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Grid container>
+        <Grid
+          item
+          xs={12}
+          style={{
+            textAlign: "center",
+            marginTop: "20px",
+            fontWeight: "bold",
+            fontSize: "1.2rem",
+            marginBottom: "20px",
+            position: "relative",
+          }}
+        >
+          <div
+            style={{
+              display: "inline-block",
+              position: "absolute",
+              float: "left",
+              left: "25px",
+            }}
+            onClick={() => {
+              window.history.back();
+            }}
+          >
+            {"<"}
+          </div>
+          Report and Records
+        </Grid>
+      </Grid>
+      <Box
+        sx={{ borderBottom: 1, borderColor: "divider", textAlign: "center" }}
+      >
         <Tabs
           TabIndicatorProps={{ style: { backgroundColor: "#52B6C3" } }}
           value={value}
@@ -203,15 +232,15 @@ export default function BasicTabs() {
           {Array(5).fill("").map(Documents)}
         </div>
         <br />
-        <h3 style={{color:'#4b4b4b'}}>Records Analysis</h3>
+        <h3 style={{ color: "#4b4b4b" }}>Records Analysis</h3>
         {renderRecords()}
       </TabPanel>
       <TabPanel value={value} index={1}>
-      <div style={{ display: "flex", overflowX: "auto", width: "100%" }}>
+        <div style={{ display: "flex", overflowX: "auto", width: "100%" }}>
           {Array(5).fill("").map(Documents)}
         </div>
         <br />
-        <h3 style={{color:'#4b4b4b'}}>Records Analysis</h3>
+        <h3 style={{ color: "#4b4b4b" }}>Records Analysis</h3>
         {renderRecords()}
       </TabPanel>
     </Box>

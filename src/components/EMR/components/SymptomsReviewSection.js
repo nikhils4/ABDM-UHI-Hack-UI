@@ -12,8 +12,21 @@ export const SymptomsReviewSection = ({
   majorSymptoms = [],
 }) => {
   const navigate = useNavigate();
-
+  let url_string = window.location.href;
+  let url = new URL(url_string);
+  const appointmentId = url.searchParams.get("apptId");
   const handleGoBack = () => {
+    window.localStorage.setItem(
+      appointmentId,
+      JSON.stringify({
+        selectedProminenceOfSymptoms,
+        painLocation,
+        accompaniedSymptoms,
+        symptomsInduced,
+        symptomsRelievedBy,
+        majorSymptoms,
+      })
+    );
     navigate("/");
   };
 
@@ -27,7 +40,7 @@ export const SymptomsReviewSection = ({
     window.localStorage.removeItem("diagnosis");
     window.localStorage.removeItem("advice");
     window.localStorage.setItem(
-      "consultationData",
+      appointmentId,
       JSON.stringify({
         selectedProminenceOfSymptoms,
         painLocation,

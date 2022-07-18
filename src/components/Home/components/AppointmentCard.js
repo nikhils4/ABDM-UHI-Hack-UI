@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const AppointmentCard = ({ appointment }) => {
   const {
@@ -12,6 +12,7 @@ export const AppointmentCard = ({ appointment }) => {
     emrId,
     status,
   } = appointment;
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -65,6 +66,15 @@ export const AppointmentCard = ({ appointment }) => {
         >
           {" "}
           <button
+            onClick={(status) => {
+              if (status === "act") {
+                navigate(`/mainEmr?emrId=${emrId}`);
+              } else {
+                navigate(
+                  `/emr?apptId=${appointmentId}&emrId=${emrId}&name=${patientName}&time=${appointmentTime}&source=${appointmentSource}`
+                );
+              }
+            }}
             style={{
               width: "fit-content",
               position: "absolute",
@@ -79,7 +89,7 @@ export const AppointmentCard = ({ appointment }) => {
               cursor: "pointer",
             }}
           >
-            + Symptoms
+            {status === "act" ? "Consult" : "+ Symptoms"}
           </button>
         </Link>
       )}
