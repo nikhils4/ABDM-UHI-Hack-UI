@@ -35,7 +35,6 @@ export const TopBar = ({ selectedDate }) => {
       >
         <CalendarMonthIcon
           onClick={() => {
-            console.log("asfdv");
             setOpen((isOpen) => !isOpen);
           }}
         />

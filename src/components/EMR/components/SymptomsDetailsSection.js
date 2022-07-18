@@ -24,17 +24,12 @@ export const SymptomsDetailsSection = ({
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setSymptomsDetailData(data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
-  console.log({
-    setSymptomsDetailData,
-  });
 
   const handleClick = (dataObject, section) => {
     if (section === "SI") {

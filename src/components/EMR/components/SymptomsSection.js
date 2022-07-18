@@ -39,20 +39,6 @@ export const SymptomsSection = ({
       .catch((err) => {
         console.log(err);
       });
-    // fetch("https://uhi-hack.herokuapp.com/symptoms/doctor/checkup", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     EmrId: emrId,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     setSymptomsData(data?.H);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   }, []);
 
   const handleClick = (dataObject, section) => {
@@ -98,7 +84,6 @@ export const SymptomsSection = ({
   };
 
   const handleGoForward = () => {
-    console.log("clicked");
     const currentIndex = screenFlow.indexOf(screenState);
     const newIndex = currentIndex + 1;
     const newScreenState = screenFlow[newIndex];

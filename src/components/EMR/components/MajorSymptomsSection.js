@@ -61,10 +61,6 @@ export const MajorSymptomsSection = ({
     setScreenState("SymptomsSection");
   };
 
-  console.log({
-    majorSymptoms,
-  });
-
   const doesItContain = (value, array, keyToSearch) => {
     return array.some((data) => data[keyToSearch] === value);
   };

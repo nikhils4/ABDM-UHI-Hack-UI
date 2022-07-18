@@ -43,7 +43,6 @@ function a11yProps(index) {
 
 const renderDocumentCard = (cur, title) => {
   const handleOpenPdf = (base64) => {
-    console.log("open");
     window.open(encodeURI(base64));
   };
   return (
@@ -323,12 +322,6 @@ export default function BasicTabs() {
 
 const renderMedical = (medical, idx) => {
   const keys = Object.keys(medical);
-  // console.log({
-  //   keys,
-  //   report,
-  //   hello: report[key],
-  // });
-
   const getFormattedKey = (key) => {
     if (key === "provisionalDiagnosis") {
       return "Provisional Diagnosis";
@@ -345,18 +338,6 @@ const renderMedical = (medical, idx) => {
   };
 
   return keys.map((key) => {
-    console.log({
-      medical,
-      key,
-    });
-    // if (key === "documentDate") {
-    //   return (
-    //     <div key={idx}>
-    //       <h3 style={{ color: "#4b4b4b" }}>{key}</h3>
-    //       <p style={{ color: "#4b4b4b" }}>{report[key]}</p>
-    //     </div>
-    //   );
-    // }
     return (
       <>
         {medical[key].length > 0 && (
@@ -374,7 +355,6 @@ const renderMedical = (medical, idx) => {
               <br />
               <ul>
                 {medical[key].map((ele) => {
-                  console.log({ ele });
                   return <li>{ele}</li>;
                 })}
               </ul>
@@ -388,21 +368,6 @@ const renderMedical = (medical, idx) => {
 
 const renderRecords = (report, idx) => {
   const keys = Object.keys(report);
-  // console.log({
-  //   keys,
-  //   report,
-  //   hello: report[key],
-  // });
-
-  // if (key === "documentDate") {
-  //   return (
-  // <div key={idx}>
-  //   <h3 style={{ color: "#4b4b4b" }}>{key}</h3>
-  //   <p style={{ color: "#4b4b4b" }}>{report[key]}</p>
-  // </div>
-  //   );
-  // }
-
   return keys.map((key) => {
     if (key === "documentDate") {
       return null;

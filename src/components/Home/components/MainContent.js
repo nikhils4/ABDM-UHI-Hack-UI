@@ -26,9 +26,6 @@ export const MainContent = ({ selectedDate }) => {
 
   const formatAppointmentList = (data) => {
     return data.map((appointment) => {
-      console.log({
-        appointment: appointment,
-      });
       if (appointment.patient) {
         return {
           patientName:
